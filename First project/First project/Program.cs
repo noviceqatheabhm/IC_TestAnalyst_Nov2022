@@ -77,8 +77,48 @@ else
 }
 
 //click on edit item
-//edit the code textbox to new value
-// click on save
-//check if your entry to code textbox is the same as the new value
+IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+editButton.Click();
+// Edit Action 1: edit the code textbox to new value and save
+IWebElement code = driver.FindElement(By.Id("Code"));
+code.SendKeys("1");
+IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
+saveButton.Click();
+Thread.Sleep(1000);
+
+//Test 1: check if edit is successful
+IWebElement lastPage = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+lastPage.Click();
+IWebElement checkLastRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+
+if (checkLastRecord.Text == "Autotest1")
+{
+    Console.WriteLine("Test passed, Successfully edited to Autotest1");
+}
+else
+{
+    Console.WriteLine("Test failed, Edit to Autotest1 not successful");
+}
+
+//Edit Action 2: to delete the code entry and add completely new value to code textbox
+IWebElement edittwiceButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+edittwiceButton.Click();
+driver.FindElement(By.Id("Code")).Clear();
+driver.FindElement(By.Id("Code")).SendKeys("newAutoTest");
+driver.FindElement(By.Id("SaveButton")).Click();
+Thread.Sleep(1000);
+//Test 2: check if your entry to code textbox is the same as the new value
+//go to last page
+driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span")).Click();
+IWebElement checkLastrecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+
+if (checkLastrecord.Text == "newAutoTest")
+{
+    Console.WriteLine("Test passed, Successfuly edited to newAutotest.");
+}
+else
+{
+    Console.WriteLine("Test failed, Edit to newAutotest failed, not successful");
+}
 
 //click on delete item

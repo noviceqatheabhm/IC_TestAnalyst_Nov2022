@@ -1,4 +1,5 @@
 ﻿using First_project.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -17,6 +18,7 @@ namespace First_project.Pages
             create.Click();
 
             // Identify the Typecode dropdown box and select Time
+                        
             IWebElement typeCode = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
             typeCode.Click();
             IWebElement Time = driver.FindElement(By.XPath("/html/body/div[5]"));
@@ -40,27 +42,28 @@ namespace First_project.Pages
             IWebElement savebutton = driver.FindElement(By.Id("SaveButton"));
             savebutton.Click();
 
-            //Thread.Sleep(5000);
-            //using EXPLICIT WAIT instead of thread.sleep 
-                //var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
-                //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-
             // FLUENT WAIT
-            Wait.WaitForWebElementTobeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 5);
+            Wait.WaitForWebElementTobeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 50);
 
             //Check if the entry is saved by checking the last page, last entry
-            IWebElement lastpage = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            lastpage.Click();
-            IWebElement checklastrecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            lastPageButton.Click();
+            
+            IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]")); 
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
 
-            if (checklastrecord.Text == "Autotest")
-            {
-                Console.WriteLine("Test passed, New record created successfully");
-            }
-            else
-            {
-                Console.WriteLine("Test failed, new record not created successfully");
-            }
+            Assert.That(newCode.Text == "Autotest", "Actual and expected do not match - New Code Entry");
+            Assert.That(newDescription.Text == "Description", "Actual and expected do not match - New Description Entry");
+            Assert.That(newPrice.Text == "$100.00", "Actual and expected do not match - New Price Entry");
+            //if (checklastrecord.Text == "Autotest")
+            //{
+            //   Console.WriteLine("Test passed, New record created successfully");
+            //}
+            //else
+            //{
+            //  Console.WriteLine("Test failed, new record not created successfully");
+            //}
         }
         public void EditTM(IWebDriver driver) 
         {
@@ -120,10 +123,15 @@ namespace First_project.Pages
             driver.SwitchTo().Alert().Accept();
 
             //to check if the item has been deleted
-            if (checkLastrecord.Text == "newAutoTest")
-            { Console.WriteLine("Record not deleted, Test failed"); }
-            else
-            { Console.WriteLine("Record deleted successfully"); }
+            //if (checkLastRecord.Text == "newAutoTest")
+            //{ Console.WriteLine("Record not deleted, Test failed"); }
+            //else
+            //{ Console.WriteLine("Record deleted successfully"); }
+
+            //Thread.Sleep(5000);
+            //using EXPLICIT WAIT instead of thread.sleep 
+            //var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
 
         }
 

@@ -1,0 +1,27 @@
+
+using First_project.Pages;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+//static void Main(string[] args) - To provide instructions that this is where the project starts
+//{
+
+//}
+//open browser
+IWebDriver driver = new ChromeDriver();
+
+
+//Login page object initialization and definition
+LoginPage loginPageObj = new LoginPage();
+loginPageObj.LoginActions(driver);
+
+//Home Page object initialisation and definition
+HomePage homePageObj = new HomePage();
+homePageObj.GoToTM(driver);
+
+//TM page object initialization and definition
+TMPage tmPageobj= new TMPage();
+tmPageobj.CreateTM(driver);
+tmPageobj.EditTM(driver);
+tmPageobj.DeleteTM(driver);
+

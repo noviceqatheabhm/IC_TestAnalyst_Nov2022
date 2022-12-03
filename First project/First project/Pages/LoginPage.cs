@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using NUnit.Framework;
 
 namespace First_project.Pages
 {
@@ -12,15 +14,23 @@ namespace First_project.Pages
     {
         public void LoginActions(IWebDriver driver)
         {
-
+            //driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
 
             // open URL
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
 
             // Identify the username and enter the username
-            IWebElement username = driver.FindElement(By.Id("UserName"));
-            username.SendKeys("hari");
+            try
+            {
+                IWebElement username = driver.FindElement(By.Id("UserName"));
+                username.SendKeys("hari")
+            }
+            catch(Exception ex) 
+            {
+                Assert.Fail("Turnup Portal page did not launch");
+            }
+
             // Identify the password and enter the password
             IWebElement password = driver.FindElement(By.Id("Password"));
             password.SendKeys("123123");

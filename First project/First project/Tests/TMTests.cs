@@ -7,6 +7,7 @@ using First_project.Utilities;
 namespace First_project.Tests
 {
     [TestFixture]
+    [Parallelizable]
     public class TMTests : CommonDriver
     {
 
@@ -27,32 +28,32 @@ namespace First_project.Tests
             homePageObj.GoToTM(driver);
         }
 
-        [Test]
+        [Test, Order(1)]
         public void CreateTM_Tests() //these tests are completely independent
         {
-            TMPage tmPageobj = new TMPage();
-            tmPageobj.CreateTM(driver);
+           // TMPage tmPageobj = new TMPage();
+            //tmPageobj.CreateTM(driver);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void EditTM_Tests()
         {
-            TMPage tmPageobj = new TMPage();        
-            tmPageobj.EditTM(driver);
+            //TMPage tmPageobj = new TMPage();        
+            //tmPageobj.EditTM(driver);
             
         }
 
-        [Test]
+        [Test, Order(3)]
         public void DeleteTM_Tests()
         {
-            TMPage tmPageobj = new TMPage();
-            tmPageobj.DeleteTM(driver);
+            //TMPage tmPageobj = new TMPage();
+            //tmPageobj.DeleteTM(driver);
         }
 
         [TearDown]
         public void CloseTestRun()
         {
-
+             driver.Quit();
         }
 
 

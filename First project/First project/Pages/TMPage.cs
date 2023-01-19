@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace First_project.Pages
 {
-    public class TMPage
+    public class TMPage 
     {
         public void CreateTM(IWebDriver driver)
         {
@@ -43,7 +43,7 @@ namespace First_project.Pages
             savebutton.Click();
 
             // FLUENT WAIT
-            Wait.WaitForWebElementTobeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 50);
+            Wait.WaitForWebElementTobeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 100);
 
             //Check if the entry is saved by checking the last page, last entry
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));

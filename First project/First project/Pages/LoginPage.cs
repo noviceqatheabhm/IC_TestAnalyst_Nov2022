@@ -24,11 +24,11 @@ namespace First_project.Pages
             try
             {
                 IWebElement username = driver.FindElement(By.Id("UserName"));
-                username.SendKeys("hari")
+                username.SendKeys("hari");
             }
             catch(Exception ex) 
             {
-                Assert.Fail("Turnup Portal page did not launch");
+                Assert.Fail("Turnup Portal page did not launch",ex.Message);
             }
 
             // Identify the password and enter the password
